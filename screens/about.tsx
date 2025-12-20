@@ -2,7 +2,7 @@ import React from "react";
 
 export default function AboutScreen() {
   return (
-    <section id="about" className="py-24 bg-white dark:bg-zinc-900">
+    <section id="about" className="py-24 bg-white dark:bg-black">
       <div className="max-w-4xl mx-auto px-6">
         <h2 className="text-3xl font-bold mb-4 text-zinc-900 dark:text-zinc-50">About</h2>
         <p className="text-zinc-700 dark:text-zinc-300 leading-relaxed">
