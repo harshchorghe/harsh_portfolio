@@ -12,7 +12,7 @@ export default function YouTubeCard({
 	description = "Videos about web development, UI and animations.",
 }: Props) {
 	return (
-		<div className="flex items-center gap-4 p-4 bg-white dark:bg-zinc-800 rounded-lg shadow-sm">
+		<div className="flex items-center mr-10px gap-4 p-4 bg-white dark:bg-zinc-800 rounded-lg shadow-sm">
 			<a
 				href={channelUrl}
 				target="_blank"

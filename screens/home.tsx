@@ -3,7 +3,7 @@ import YouTubeCard from "../components/home/p1";
 
 export default function HomeScreen() {
 	return (
-		<section className="min-h-screen flex items-center justify-center bg-zinc-50 dark:bg-black">
+		<section id="home" className="min-h-screen flex items-center justify-center bg-zinc-50 dark:bg-black">
 			<div className="max-w-screen px-8 py-24 text-center">
 				<p className="text-sm text-zinc-500 mb-4">Hi, my name is</p>
 				<h1 className="text-5xl sm:text-6xl font-extrabold tracking-tight mb-6 text-zinc-900 dark:text-zinc-50">
@@ -40,6 +40,7 @@ export default function HomeScreen() {
 				/>
 			</div>
             
+        
 		</section>
         
         

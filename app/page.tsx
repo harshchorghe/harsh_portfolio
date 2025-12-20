@@ -1,5 +1,5 @@
-import { HomeScreen } from "../screens";
+import Scroller from "../components/scroll/Scroller";
 
 export default function Page() {
-  return <HomeScreen />;
+  return <Scroller />;
 }
