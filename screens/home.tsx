@@ -1,5 +1,6 @@
 import React from "react";
 import { Button } from "@/components/ui/moving-border";
+import ResponseForm from '@/components/home/ResponseForm';
 
 export default function HomeScreen() {
   return (
@@ -8,7 +9,7 @@ export default function HomeScreen() {
       className="min-h-screen flex items-center justify-center bg-zinc-50 dark:bg-black relative overflow-hidden"
     >
       {/* Subtle background gradient */}
-      <div className="absolute inset-0 bg-gradient-to-br from-transparent via-zinc-100/50 to-transparent dark:via-zinc-900/50 pointer-events-none" />
+      <div className="absolute inset-0 bg-linear-to-br from-transparent via-zinc-100/50 to-transparent dark:via-zinc-900/50 pointer-events-none" />
 
       <div className="relative z-10 max-w-5xl mx-auto px-8 py-24 text-center">
         <p className="text-sm md:text-base text-zinc-500 dark:text-zinc-400 mb-4 mt-6 tracking-wider uppercase">
@@ -70,6 +71,11 @@ export default function HomeScreen() {
           <div className="w-6 h-10 mx-auto border-2 border-zinc-400 dark:border-zinc-600 rounded-full flex justify-center">
             <div className="w-1 h-3 bg-zinc-400 dark:bg-zinc-600 rounded-full mt-2 animate-pulse" />
           </div>
+        </div>
+
+        {/* Feedback form appended to bottom of home screen */}
+        <div className="mt-12">
+          <ResponseForm />
         </div>
       </div>
     </section>

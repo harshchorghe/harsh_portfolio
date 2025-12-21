@@ -24,7 +24,7 @@ export default function ContactScreen() {
           "
         >
           {/* Subtle gradient overlay */}
-          <div className="absolute inset-0 bg-gradient-to-br from-transparent via-white/5 to-transparent dark:via-zinc-800/5 pointer-events-none" />
+          <div className="absolute inset-0 bg-linear-to-br from-transparent via-white/5 to-transparent dark:via-zinc-800/5 pointer-events-none" />
 
           <div className="relative text-center space-y-8">
             <p className="text-xl md:text-2xl text-zinc-800 dark:text-zinc-100 font-medium max-w-2xl mx-auto">

@@ -26,7 +26,7 @@ export default function ProjectsScreen() {
 
             <div className="relative p-8">
               {/* Placeholder for project image/thumbnail */}
-              <div className="w-full h-48 bg-gradient-to-br from-blue-400 to-purple-500 rounded-xl mb-6" />
+              <div className="w-full h-48 bg-linear-to-br from-blue-400 to-purple-500 rounded-xl mb-6" />
 
               <h3 className="text-2xl font-bold mb-3 text-zinc-900 dark:text-zinc-50">
                 Project One
@@ -67,7 +67,7 @@ export default function ProjectsScreen() {
             <div className="absolute inset-0 bg-gradient-to-br from-transparent via-white/5 to-transparent dark:via-zinc-800/5" />
 
             <div className="relative p-8">
-              <div className="w-full h-48 bg-gradient-to-br from-emerald-400 to-teal-500 rounded-xl mb-6" />
+              <div className="w-full h-48 bg-linear-to-br from-emerald-400 to-teal-500 rounded-xl mb-6" />
 
               <h3 className="text-2xl font-bold mb-3 text-zinc-900 dark:text-zinc-50">
                 Project Two
@@ -108,7 +108,7 @@ export default function ProjectsScreen() {
             <div className="absolute inset-0 bg-gradient-to-br from-transparent via-white/5 to-transparent dark:via-zinc-800/5" />
 
             <div className="relative p-8">
-              <div className="w-full h-48 bg-gradient-to-br from-pink-400 to-orange-500 rounded-xl mb-6" />
+              <div className="w-full h-48 bg-linear-to-br from-pink-400 to-orange-500 rounded-xl mb-6" />
 
               <h3 className="text-2xl font-bold mb-3 text-zinc-900 dark:text-zinc-50">
                 Project Three

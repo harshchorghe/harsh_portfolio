@@ -24,7 +24,7 @@ export default function AboutScreen() {
           "
         >
           {/* Subtle gradient overlay */}
-          <div className="absolute inset-0 bg-gradient-to-br from-transparent via-white/5 to-transparent dark:via-zinc-800/5 pointer-events-none" />
+          <div className="absolute inset-0 bg-linear-to-br from-transparent via-white/5 to-transparent dark:via-zinc-800/5 pointer-events-none" />
 
           <div className="relative space-y-8">
             {/* Intro */}

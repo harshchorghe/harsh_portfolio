@@ -61,7 +61,7 @@ export function ExpandableTabs({
   };
 
   const Separator = () => (
-    <div className="mx-1 h-[24px] w-[1.2px] bg-border" aria-hidden="true" />
+    <div className="mx-1 h-6 w-[1.2px] bg-border" aria-hidden="true" />
   );
 
   return (
@@ -96,7 +96,7 @@ export function ExpandableTabs({
               <span
                 className={cn(
                   "ml-2 overflow-hidden whitespace-nowrap",
-                  selected === index ? "max-w-[240px] opacity-100" : "max-w-0 opacity-0"
+                  selected === index ? "max-w-60 opacity-100" : "max-w-0 opacity-0"
                 )}
                 style={{ transition }}
                 aria-hidden={selected !== index}

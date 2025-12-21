@@ -2,6 +2,7 @@
 
 import React, { useState, useEffect } from "react";
 import Icons from "@/components/common/icons";
+import Link from 'next/link';
 import { ExpandableTabs } from "@/components/ui/expandable-tabs";
 
 export default function Navbar() {
@@ -40,8 +41,8 @@ export default function Navbar() {
         shadow-lg
         transition-all duration-1000 ease-out
         ${isScrolled 
-          ? "w-auto min-w-[1000px] shadow-2xl" 
-          : "w-auto min-w-[800px] shadow-md"
+          ? "w-auto min-w-250 shadow-2xl" 
+          : "w-auto min-w-200 shadow-md"
         }
       `}
     >
@@ -63,7 +64,14 @@ export default function Navbar() {
           />
         </div>
 
-    
+        {/* Right-side actions */}
+        <div className="flex items-center gap-3">
+          <Link href="/collab" aria-label="Open collaboration form" title="Collaborate">
+            <button className="rounded-full p-2 bg-white/8 dark:bg-zinc-800/20 backdrop-blur-sm border border-white/10 dark:border-zinc-700/30 text-zinc-900 dark:text-zinc-50 hover:scale-105 transition">
+              <Icons.Mail size={18} />
+            </button>
+          </Link>
+        </div>
       </div>
     </nav>
   );
