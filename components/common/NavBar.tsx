@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useState, useEffect } from "react";
-import { Moon, Sun, Home, Briefcase, Youtube, Mail } from "lucide-react";
+import Icons from "@/components/common/icons";
 import { ExpandableTabs } from "@/components/ui/expandable-tabs";
 
 export default function Navbar() {
@@ -23,10 +23,10 @@ export default function Navbar() {
 
 
   const tabs = [
-    { title: "Home", icon: Home, href: "#home" },
-    { title: "Projects", icon: Briefcase, href: "#projects" },
-    { title: "YouTube", icon: Youtube, href: "#youtube" },
-    { title: "Contact", icon: Mail, href: "#contact" },
+    { title: "Home", icon: Icons.Home, href: "#home" },
+    { title: "Projects", icon: Icons.Briefcase, href: "#projects" },
+    { title: "YouTube", icon: Icons.Youtube, href: "#youtube" },
+    { title: "Contact", icon: Icons.Mail, href: "#contact" },
   ];
 
   return (

@@ -1,15 +1,7 @@
 // components/ui/moving-border.tsx
 "use client";
 
-import React from "react";
-import {
-  motion,
-  useAnimationFrame,
-  useMotionTemplate,
-  useMotionValue,
-  useTransform,
-} from "framer-motion";
-import { useRef } from "react";
+import React, { useRef, useEffect, useState } from "react";
 import { cn } from "@/lib/utils";
 
 export function Button({
@@ -84,20 +76,38 @@ export const MovingBorder = ({
   ry?: string;
   [key: string]: unknown;
 }) => {
-  const pathRef = useRef<SVGRectElement>(null);
-  const progress = useMotionValue<number>(0);
+  const pathRef = useRef<SVGRectElement | null>(null);
+  const animRef = useRef<number | null>(null);
+  const startRef = useRef<number | null>(null);
+  const [transform, setTransform] = useState<string>("translateX(0px) translateY(0px) translateX(-50%) translateY(-50%)");
 
-  useAnimationFrame((time) => {
-    const length = pathRef.current?.getTotalLength();
-    if (length) {
-      const pxPerMillisecond = length / duration;
-      progress.set((time * pxPerMillisecond) % length);
+  useEffect(() => {
+    function step(time: number) {
+      if (!pathRef.current) {
+        animRef.current = requestAnimationFrame(step);
+        return;
+      }
+      const length = pathRef.current.getTotalLength();
+      if (!length) {
+        animRef.current = requestAnimationFrame(step);
+        return;
+      }
+
+      if (startRef.current === null) startRef.current = time;
+      const elapsed = time - startRef.current;
+      const pxPerMillisecond = length / (duration || 2000);
+      const pos = ((elapsed * pxPerMillisecond) % length) || 0;
+      const point = pathRef.current.getPointAtLength(pos);
+      setTransform(`translateX(${point.x}px) translateY(${point.y}px) translateX(-50%) translateY(-50%)`);
+
+      animRef.current = requestAnimationFrame(step);
     }
-  });
 
-  const x = useTransform(progress, (val) => pathRef.current?.getPointAtLength(val).x ?? 0);
-  const y = useTransform(progress, (val) => pathRef.current?.getPointAtLength(val).y ?? 0);
-  const transform = useMotionTemplate`translateX(${x}px) translateY(${y}px) translateX(-50%) translateY(-50%)`;
+    animRef.current = requestAnimationFrame(step);
+    return () => {
+      if (animRef.current) cancelAnimationFrame(animRef.current);
+    };
+  }, [duration]);
 
   return (
     <>
@@ -119,7 +129,7 @@ export const MovingBorder = ({
         />
       </svg>
 
-      <motion.div
+      <div
         style={{
           position: "absolute",
           top: 0,
@@ -129,7 +139,7 @@ export const MovingBorder = ({
         }}
       >
         {children}
-      </motion.div>
+      </div>
     </>
   );
 };
