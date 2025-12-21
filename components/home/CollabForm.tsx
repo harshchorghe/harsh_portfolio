@@ -54,8 +54,20 @@ export default function CollabForm() {
   const [emailValue, setEmailValue] = useState('');
   const [emailError, setEmailError] = useState<string | null>(null);
 
+  type FieldErr = { field?: string; name?: string; message?: string };
   const serverFieldError = (field: string) => {
-    return formState.errors?.find((e: any) => e.field === field)?.message || null;
+    // Normalise errors to an array for safe lookup (Formspree typings vary)
+    const raw = (formState as unknown as { errors?: FieldErr | Record<string, FieldErr> | FieldErr[] }).errors;
+    const arr: FieldErr[] = Array.isArray(raw) ? raw : raw ? Object.values(raw as Record<string, FieldErr>) : [];
+    const found = arr.find((e) => e?.field === field || e?.name === field);
+    return found?.message ?? null;
+  };
+
+  const handleEmailChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const val = e.target.value;
+    setEmailValue(val);
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    setEmailError(val && !emailRegex.test(val) ? 'Please enter a valid email' : null);
   };
 
 
@@ -227,7 +239,11 @@ export default function CollabForm() {
         <p className="text-center text-green-200 text-lg">Thanks! I’ll get back to you soon 🎉</p>
       )}
 
-      {!formState.succeeded && formState.errors && formState.errors.length > 0 && (
+      {!formState.succeeded && (() => {
+        const raw = (formState as unknown as { errors?: FieldErr | Record<string, FieldErr> | FieldErr[] }).errors;
+        const arr: FieldErr[] = Array.isArray(raw) ? raw : raw ? Object.values(raw as Record<string, FieldErr>) : [];
+        return arr.length > 0;
+      })() && (
         <p className="text-center text-red-300 text-lg">Oops! Something went wrong. Please check the highlighted fields.</p>
       )}
       </form>
