@@ -6,22 +6,10 @@ import { ExpandableTabs } from "@/components/ui/expandable-tabs";
 
 export default function Navbar() {
   const [isScrolled, setIsScrolled] = useState(false);
-  const [theme, setTheme] = useState<"light" | "dark">("light");
 
-  // Theme initialization
-  useEffect(() => {
-    const savedTheme = localStorage.getItem("theme") as "light" | "dark" | null;
-    const initialTheme =
-      savedTheme ||
-      (window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light");
-    setTheme(initialTheme);
-  }, []);
 
-  // Apply theme
-  useEffect(() => {
-    document.documentElement.classList.toggle("dark", theme === "dark");
-    localStorage.setItem("theme", theme);
-  }, [theme]);
+
+
 
   // Scroll effect (kept exactly as you wanted)
   useEffect(() => {
@@ -32,9 +20,7 @@ export default function Navbar() {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  const toggleTheme = () => {
-    setTheme((prev) => (prev === "light" ? "dark" : "light"));
-  };
+
 
   const tabs = [
     { title: "Home", icon: Home, href: "#home" },
@@ -77,21 +63,7 @@ export default function Navbar() {
           />
         </div>
 
-        {/* Theme Toggle */}
-        <button
-          onClick={toggleTheme}
-          className="relative p-2.5 rounded-xl bg-white/40 dark:bg-zinc-800/40 backdrop-blur border border-white/30 dark:border-zinc-700/50 hover:scale-110 transition-all duration-300 group"
-          aria-label="Toggle theme"
-        >
-          <Sun
-            className={`h-5 w-5 text-yellow-500 absolute inset-0 m-auto transition-all duration-500 group-hover:rotate-180
-              ${theme === "dark" ? "rotate-180 scale-0 opacity-0" : "rotate-0 scale-100 opacity-100"}`}
-          />
-          <Moon
-            className={`h-5 w-5 text-indigo-400 absolute inset-0 m-auto transition-all duration-500 group-hover:-rotate-12
-              ${theme === "dark" ? "rotate-0 scale-100 opacity-100" : "-rotate-180 scale-0 opacity-0"}`}
-          />
-        </button>
+    
       </div>
     </nav>
   );

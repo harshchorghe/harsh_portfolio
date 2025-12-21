@@ -2,14 +2,12 @@
 "use client";
 
 import * as React from "react";
-import { AnimatePresence, motion } from "framer-motion";
-import { useOnClickOutside } from "usehooks-ts";
 import { cn } from "@/lib/utils";
-import { LucideIcon } from "lucide-react";
+
 
 interface Tab {
   title: string;
-  icon: LucideIcon;
+  icon: React.ComponentType<{ size?: number }>;
   href: string;
   type?: never;
 }
@@ -30,26 +28,8 @@ interface ExpandableTabsProps {
   onChange?: (index: number | null) => void;
 }
 
-const buttonVariants = {
-  initial: {
-    gap: 0,
-    paddingLeft: ".5rem",
-    paddingRight: ".5rem",
-  },
-  animate: (isSelected: boolean) => ({
-    gap: isSelected ? ".5rem" : 0,
-    paddingLeft: isSelected ? "1rem" : ".5rem",
-    paddingRight: isSelected ? "1rem" : ".5rem",
-  }),
-};
-
-const spanVariants = {
-  initial: { width: 0, opacity: 0 },
-  animate: { width: "auto", opacity: 1 },
-  exit: { width: 0, opacity: 0 },
-};
-
-const transition = { delay: 0.1, type: "spring", bounce: 0, duration: 0.6 };
+// Simple CSS-driven expand/collapse for compatibility and smaller bundle
+const transition = "all 220ms cubic-bezier(.2,.9,.2,1)";
 
 export function ExpandableTabs({
   tabs,
@@ -58,16 +38,26 @@ export function ExpandableTabs({
   onChange,
 }: ExpandableTabsProps) {
   const [selected, setSelected] = React.useState<number | null>(null);
-  const outsideClickRef = React.useRef<HTMLDivElement>(null);
+  const outsideClickRef = React.useRef<HTMLDivElement | null>(null);
 
-  useOnClickOutside(outsideClickRef, () => {
-    setSelected(null);
-    onChange?.(null);
-  });
+  // Simple onClickOutside implementation
+  React.useEffect(() => {
+    function handle(e: MouseEvent) {
+      const node = outsideClickRef.current;
+      if (!node) return;
+      if (e.target instanceof Node && !node.contains(e.target)) {
+        setSelected(null);
+        onChange?.(null);
+      }
+    }
+    document.addEventListener("mousedown", handle);
+    return () => document.removeEventListener("mousedown", handle);
+  }, [onChange]);
 
   const handleSelect = (index: number) => {
-    setSelected(selected === index ? null : index);
-    onChange?.(selected === index ? null : index);
+    const next = selected === index ? null : index;
+    setSelected(next);
+    onChange?.(next);
   };
 
   const Separator = () => (
@@ -91,36 +81,29 @@ export function ExpandableTabs({
 
         return (
           <a href={tab.href} key={tab.title}>
-            <motion.button
-              variants={buttonVariants}
-              initial={false}
-              animate="animate"
-              custom={selected === index}
+            <button
               onClick={() => handleSelect(index)}
-              transition={transition}
+              style={{ transition }}
               className={cn(
-                "relative flex items-center rounded-xl px-4 py-2 text-sm font-medium transition-colors duration-300",
+                "relative flex items-center rounded-xl px-4 py-2 text-sm font-medium",
+                "transition-colors duration-200",
                 selected === index
                   ? cn("bg-muted", activeColor)
                   : "text-muted-foreground hover:bg-muted hover:text-foreground"
               )}
             >
               <Icon size={20} />
-              <AnimatePresence initial={false}>
-                {selected === index && (
-                  <motion.span
-                    variants={spanVariants}
-                    initial="initial"
-                    animate="animate"
-                    exit="exit"
-                    transition={transition}
-                    className="ml-2 overflow-hidden whitespace-nowrap"
-                  >
-                    {tab.title}
-                  </motion.span>
+              <span
+                className={cn(
+                  "ml-2 overflow-hidden whitespace-nowrap",
+                  selected === index ? "max-w-[240px] opacity-100" : "max-w-0 opacity-0"
                 )}
-              </AnimatePresence>
-            </motion.button>
+                style={{ transition }}
+                aria-hidden={selected !== index}
+              >
+                {tab.title}
+              </span>
+            </button>
           </a>
         );
       })}
