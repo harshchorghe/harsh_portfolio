@@ -1,5 +1,5 @@
 import React from "react";
-import { Mail, Instagram, Youtube, Linkedin, Globe } from "lucide-react";
+import Icons from "@/components/common/icons";
 
 export default function ContactScreen() {
   return (
@@ -43,7 +43,7 @@ export default function ContactScreen() {
                   transition-all duration-300 shadow-lg
                 "
               >
-                <Mail className="w-6 h-6" />
+                <Icons.Mail className="w-6 h-6" />
                 Email Me
               </a>
             </div>
@@ -67,7 +67,7 @@ export default function ContactScreen() {
                     transition-all duration-300
                   "
                 >
-                  <Youtube className="w-5 h-5" />
+                  <Icons.Youtube className="w-5 h-5" />
                   <span className="font-medium">explorush</span>
                 </a>
 
@@ -85,7 +85,7 @@ export default function ContactScreen() {
                     transition-all duration-300
                   "
                 >
-                  <Instagram className="w-5 h-5" />
+                  <Icons.Instagram className="w-5 h-5" />
                   <span className="font-medium">@artistic__explorer__</span>
                 </a>
 
@@ -103,7 +103,7 @@ export default function ContactScreen() {
                     transition-all duration-300
                   "
                 >
-                  <Linkedin className="w-5 h-5" />
+                  <Icons.Linkedin className="w-5 h-5" />
                   <span className="font-medium">LinkedIn</span>
                 </a>
 
@@ -114,7 +114,7 @@ export default function ContactScreen() {
                   rel="noopener noreferrer"
                   className="flex items-center gap-3 px-6 py-3 rounded-2xl bg-zinc-800/10 dark:bg-zinc-700/20 border border-zinc-800/30 dark:border-zinc-600/40 text-zinc-800 dark:text-zinc-300 hover:scale-110 transition-all duration-300"
                 >
-                  <Globe className="w-5 h-5" />
+                  <Icons.Globe className="w-5 h-5" />
                   <span className="font-medium">Website</span>
                 </a> */}
               </div>

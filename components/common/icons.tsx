@@ -84,6 +84,30 @@ export const Moon = ({ size = 20, className = "" }: IconProps) => (
   </svg>
 );
 
-const Icons = { Home, Briefcase, Youtube, Mail, Sun, Moon };
+export const Instagram = ({ size = 20, className = "" }: IconProps) => (
+  <svg className={className} width={size} height={size} viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <rect x="3" y="3" width="18" height="18" rx="5" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+    <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z" stroke="currentColor" strokeWidth="1" strokeLinecap="round" strokeLinejoin="round" />
+    <circle cx="17.5" cy="6.5" r="0.5" fill="currentColor" />
+  </svg>
+);
+
+export const Linkedin = ({ size = 20, className = "" }: IconProps) => (
+  <svg className={className} width={size} height={size} viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <rect x="2" y="2" width="20" height="20" rx="2" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+    <path d="M16 8a2 2 0 0 1 2 2v6" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+    <path d="M8 11v7" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+    <path d="M8 8v.01" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+  </svg>
+);
+
+export const Globe = ({ size = 20, className = "" }: IconProps) => (
+  <svg className={className} width={size} height={size} viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <circle cx="12" cy="12" r="9" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+    <path d="M2 12h20M12 2c2.5 3 2.5 9 0 20M12 2c-2.5 3-2.5 9 0 20" stroke="currentColor" strokeWidth="1" strokeLinecap="round" strokeLinejoin="round" />
+  </svg>
+);
+
+const Icons = { Home, Briefcase, Youtube, Mail, Sun, Moon, Instagram, Linkedin, Globe };
 export default Icons;
 export type { IconProps };
