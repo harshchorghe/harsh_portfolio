@@ -74,9 +74,7 @@ export default function HomeScreen() {
         </div>
 
         {/* Feedback form appended to bottom of home screen */}
-        <div className="mt-12">
-          <ResponseForm />
-        </div>
+       
       </div>
     </section>
   );
