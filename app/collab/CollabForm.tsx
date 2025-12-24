@@ -81,7 +81,7 @@ export default function CollabForm() {
       {/* Back button */}
       <button
         type="button"
-        onClick={() => router.back()}
+        onClick={() => router.push('/')}
         aria-label="Go back"
         className="absolute left-2 top-2 rounded-full p-2 bg-white/6 backdrop-blur-sm border border-white/10 text-white hover:scale-105 transition"
       >

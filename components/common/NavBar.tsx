@@ -8,10 +8,6 @@ import { ExpandableTabs } from "@/components/ui/expandable-tabs";
 export default function Navbar() {
   const [isScrolled, setIsScrolled] = useState(false);
 
-
-
-
-
   // Scroll effect (kept exactly as you wanted)
   useEffect(() => {
     const handleScroll = () => {
@@ -21,12 +17,11 @@ export default function Navbar() {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-
-
   const tabs = [
     { title: "Home", icon: Icons.Home, href: "#home" },
     { title: "Projects", icon: Icons.Briefcase, href: "#projects" },
-    { title: "YouTube", icon: Icons.Youtube, href: "#youtube" },
+    { title: "YouTube", icon: Icons.Youtube, href: "/youtube" }, // Changed to route to new YouTube page
+    { title: "Instagram", icon: Icons.Instagram, href: "/instagram" }, // Added Instagram tab (assuming Icons.Instagram exists; if not, add it to your icons component)
     { title: "Contact", icon: Icons.Mail, href: "#contact" },
   ];
 
