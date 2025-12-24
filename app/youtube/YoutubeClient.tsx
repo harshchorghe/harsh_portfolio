@@ -1,8 +1,7 @@
-// app/youtube/YoutubeClient.tsx
 "use client";
 
 import React from "react";
-import { useRouter } from "next/navigation"; // Correct import for App Router
+import { useRouter } from "next/navigation";
 import { ArrowLeft } from "lucide-react";
 
 type Video = {
