@@ -2,7 +2,7 @@
 
 import Navbar from "@/components/common/NavBar";
 import React from "react";
-import { div } from "three/tsl";
+
 
 export default function InstagramPage() {
   const handleInstagramClick = () => {
