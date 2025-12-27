@@ -14,18 +14,19 @@ const geistMono = Geist_Mono({
 
 export const metadata: Metadata = {
   title: "Harsh Chorghe | Portfolio",
-  description: "Frontend developer building delightful, animated web experiences with modern tech.",
+  description:
+    "Frontend developer building delightful, animated web experiences with modern tech.",
 };
 
 export default function RootLayout({
   children,
-}: Readonly<{
+}: {
   children: React.ReactNode;
-}>) {
+}) {
   return (
     <html lang="en" suppressHydrationWarning>
       <head>
-        {/* Prevents dark mode flash/flicker on page load */}
+        {/* Prevent dark mode flicker */}
         <script
           dangerouslySetInnerHTML={{
             __html: `
@@ -45,10 +46,22 @@ export default function RootLayout({
           }}
         />
       </head>
+
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased bg-zinc-50 dark:bg-black min-h-screen`}
+        className={`
+          ${geistSans.variable}
+          ${geistMono.variable}
+          antialiased
+          min-h-screen
+        `}
       >
-        {children}
+        {/* 🌍 Global Background */}
+        <div className="min-h-screen bg-fixed bg-cover bg-center bg-no-repeat bg-[url('/bg.jpeg')]">
+          {/* 🎨 Overlay for readability */}
+          <div className="min-h-screen bg-white/75 dark:bg-black/75 backdrop-blur-sm">
+            {children}
+          </div>
+        </div>
       </body>
     </html>
   );

@@ -2,7 +2,7 @@ import React from "react";
 
 export default function ProjectsScreen() {
   return (
-    <section id="projects" className="py-24 bg-zinc-50 dark:bg-black">
+    <section id="projects" className="py-10 ">
       <div className="max-w-5xl mx-auto px-6">
         <h2 className="text-4xl font-bold mb-12 text-center text-zinc-900 dark:text-zinc-50">
           Projects

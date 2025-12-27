@@ -1,6 +1,8 @@
 "use client";
 
+import Navbar from "@/components/common/NavBar";
 import React from "react";
+import { div } from "three/tsl";
 
 export default function InstagramPage() {
   const handleInstagramClick = () => {
@@ -12,7 +14,11 @@ export default function InstagramPage() {
   };
 
   return (
+    <div className="mb-20">
+      <Navbar />
+    
     <div className="min-h-screen bg-black flex items-center justify-center p-4 relative overflow-hidden">
+      
       <style jsx>{`
         @keyframes float {
           0%, 100% { transform: translateY(0px) rotate(0deg); }
@@ -264,7 +270,7 @@ export default function InstagramPage() {
         </svg>
       </button>
       
-      <div className="glass-card rounded-[2.5rem] p-8 md:p-12 max-w-lg w-full relative z-10 animate-scale-in">
+      <div className="glass-card mt-20 rounded-[2.5rem] p-8 md:p-12 max-w-lg w-full relative z-10 animate-scale-in">
         {/* Profile Image with animated ring */}
         <div className="flex justify-center mb-8">
           <div className="profile-ring">
@@ -347,6 +353,7 @@ export default function InstagramPage() {
           <div className="pulse-dot w-2 h-2 rounded-full bg-orange-500" style={{animationDelay: '0.6s'}}></div>
         </div>
       </div>
+    </div>
     </div>
   );
 }

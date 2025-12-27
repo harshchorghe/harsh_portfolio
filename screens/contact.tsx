@@ -3,7 +3,7 @@ import Icons from "@/components/common/icons";
 
 export default function ContactScreen() {
   return (
-    <section id="contact" className="py-32 bg-zinc-50 dark:bg-black">
+    <section id="contact" className="py-32 ">
       <div className="max-w-4xl mx-auto px-6">
         {/* Heading */}
         <h2 className="text-4xl sm:text-5xl font-extrabold text-center mb-16 text-zinc-900 dark:text-zinc-50 tracking-tight">

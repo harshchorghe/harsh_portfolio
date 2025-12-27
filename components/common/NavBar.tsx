@@ -2,13 +2,13 @@
 
 import React, { useState, useEffect } from "react";
 import Icons from "@/components/common/icons";
-import Link from 'next/link';
+import Link from "next/link";
 import { ExpandableTabs } from "@/components/ui/expandable-tabs";
 
 export default function Navbar() {
   const [isScrolled, setIsScrolled] = useState(false);
+  const [isOpen, setIsOpen] = useState(false);
 
-  // Scroll effect (kept exactly as you wanted)
   useEffect(() => {
     const handleScroll = () => {
       setIsScrolled(window.scrollY > 20);
@@ -18,10 +18,9 @@ export default function Navbar() {
   }, []);
 
   const tabs = [
-    { title: "Home", icon: Icons.Home, href: "#home" },
     { title: "Projects", icon: Icons.Briefcase, href: "#projects" },
-    { title: "YouTube", icon: Icons.Youtube, href: "/youtube" }, // Changed to route to new YouTube page
-    { title: "Instagram", icon: Icons.Instagram, href: "/instagram" }, // Added Instagram tab (assuming Icons.Instagram exists; if not, add it to your icons component)
+    { title: "YouTube", icon: Icons.Youtube, href: "/youtube" },
+    { title: "Instagram", icon: Icons.Instagram, href: "/instagram" },
     { title: "Contact", icon: Icons.Mail, href: "#contact" },
   ];
 
@@ -29,29 +28,30 @@ export default function Navbar() {
     <nav
       className={`
         fixed top-6 left-1/2 -translate-x-1/2 z-50
-        px-8 py-1 rounded-2xl
+        rounded-2xl
         bg-white/60 dark:bg-zinc-900/60
         backdrop-blur-lg
         border border-white/20 dark:border-zinc-700/40
-        shadow-lg
-        transition-all duration-1000 ease-out
-        ${isScrolled 
-          ? "w-auto min-w-250 shadow-2xl" 
-          : "w-auto min-w-200 shadow-md"
-        }
+        transition-all duration-700 ease-[cubic-bezier(0.16,1,0.3,1)]
+        px-6 py-2
+        md:flex md:items-center
+        ${isScrolled
+          ? "md:min-w-[960px] md:px-10 md:shadow-2xl md:scale-[1.02]"
+          : "md:min-w-[640px] md:px-6 md:shadow-md md:scale-100"}
       `}
     >
-      <div className="flex items-center justify-between w-full">
+      {/* Top Bar */}
+      <div className="flex items-center justify-between w-full gap-4">
         {/* Logo */}
-        <a
-          href="#home"
+        <Link
+          href="/"
           className="text-xl font-bold text-zinc-900 dark:text-zinc-50 hover:opacity-80 transition"
         >
           Harsh
-        </a>
+        </Link>
 
-        {/* Expandable Tabs - Center */}
-        <div className="flex-1 flex justify-center">
+        {/* Desktop Tabs */}
+        <div className="hidden md:flex flex-1 justify-center">
           <ExpandableTabs
             tabs={tabs}
             activeColor="text-blue-600 dark:text-blue-400"
@@ -59,13 +59,48 @@ export default function Navbar() {
           />
         </div>
 
-        {/* Right-side actions */}
+        {/* Actions */}
         <div className="flex items-center gap-3">
-          <Link href="/collab" aria-label="Open collaboration form" title="Collaborate">
-            <button className="rounded-full p-2 bg-white/8 dark:bg-zinc-800/20 backdrop-blur-sm border border-white/10 dark:border-zinc-700/30 text-zinc-900 dark:text-zinc-50 hover:scale-105 transition">
+          {/* Mobile Menu */}
+          <button
+            onClick={() => setIsOpen(!isOpen)}
+            className="md:hidden p-2 rounded-full border border-white/20 dark:border-zinc-700/40"
+          >
+            <Icons.Menu size={18} />
+          </button>
+
+          {/* Desktop Collab Button */}
+          <Link href="/collab" className="hidden md:block">
+            <button className="rounded-full p-2 bg-white/10 dark:bg-zinc-800/20 backdrop-blur-sm border border-white/10 dark:border-zinc-700/30 hover:scale-105 transition">
               <Icons.Mail size={18} />
             </button>
           </Link>
+        </div>
+      </div>
+
+      {/* Mobile Dropdown */}
+      <div
+        className={`
+          md:hidden overflow-hidden
+          transition-all duration-500 ease-out
+          ${isOpen ? "max-h-96 opacity-100 mt-4" : "max-h-0 opacity-0"}
+        `}
+      >
+        <div className="rounded-xl bg-white/80 dark:bg-zinc-900/80 backdrop-blur-lg border border-white/20 dark:border-zinc-700/40">
+          <ul className="flex flex-col divide-y divide-white/10">
+            {tabs.map((tab) => (
+              <li key={tab.title}>
+                <Link
+                  href={tab.href}
+                  onClick={() => setIsOpen(false)}
+                  className="flex items-center gap-3 px-4 py-3 hover:bg-white/10 transition"
+                >
+                  <tab.icon size={18} />
+                  {tab.title}
+                </Link>
+              </li>
+            ))}
+          </ul>
         </div>
       </div>
     </nav>

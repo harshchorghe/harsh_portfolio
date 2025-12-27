@@ -1,6 +1,7 @@
 // app/youtube/page.tsx
 import Parser from "rss-parser";
 import YoutubeClient from "./YoutubeClient";
+import Navbar from "@/components/common/NavBar";
 
 type Video = {
   id: string;
@@ -59,6 +60,6 @@ export default async function YoutubePage() {
   };
 
   return (
-    <YoutubeClient videos={videos} channelInfo={channelInfo} />
+    <><Navbar /><YoutubeClient videos={videos} channelInfo={channelInfo} /></>
   );
 }

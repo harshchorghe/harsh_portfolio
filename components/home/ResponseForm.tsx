@@ -52,107 +52,181 @@ export default function ResponseForm() {
   };
 
   return (
-    <div className={`mt-12 max-w-3xl mx-auto p-6 bg-white/5 backdrop-blur-lg border border-white/10 rounded-2xl shadow-xl transition-all duration-700 ${mounted ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-6'}`}>
-      {/* moving border accent */}
-      <div className="pointer-events-none absolute -inset-6 -z-10 rounded-2xl bg-linear-to-br from-purple-600/6 via-pink-500/6 to-blue-400/6 blur-3xl opacity-60" aria-hidden />
-      <div className="pointer-events-none absolute inset-0 z-0">
-        <MovingBorder duration={4500} rx="20%" ry="20%">
-          <div className="h-2 w-2 opacity-80 bg-[radial-gradient(circle,rgba(255,255,255,0.18)_0%,transparent_60%)] rounded-full" />
-        </MovingBorder>
+    <div className="max-w-5xl mt-20 mx-auto px-6">
+      <h2 className="text-4xl font-bold mb-10 text-center text-zinc-900 dark:text-zinc-50">
+        Response Form
+      </h2>
+      <div className={`relative mt-12 max-w-3xl mx-auto p-8 bg-white/10 backdrop-blur-xl border border-white/20 rounded-3xl shadow-2xl transition-all duration-700 ${mounted ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-6'}`}>
+        
+        {/* Enhanced glass effects */}
+        <div className="pointer-events-none absolute -inset-8 -z-10 rounded-3xl bg-gradient-to-br from-purple-500/10 via-pink-500/10 to-blue-400/10 blur-3xl opacity-70" aria-hidden />
+        <div className="pointer-events-none absolute inset-0 z-0 rounded-3xl bg-gradient-to-br from-white/5 to-transparent" aria-hidden />
+        
+        {/* Moving border */}
+        <div className="pointer-events-none absolute inset-0 z-0">
+          <MovingBorder duration={4500} rx="20%" ry="20%">
+            <div className="h-3 w-3 opacity-90 bg-[radial-gradient(circle,rgba(255,255,255,0.25)_0%,transparent_70%)] rounded-full" />
+          </MovingBorder>
+        </div>
+
+        <div className="relative z-10">
+          <h3 className="text-2xl font-bold text-white mb-2 tracking-tight">Share your feedback</h3>
+          <p className="text-sm text-white/80 mb-6">Quick feedback helps me improve — a few questions only.</p>
+
+          <form id="response-form" onSubmit={handleSubmit} className="space-y-5">
+            <div>
+              <label htmlFor="fullName" className="block text-sm font-semibold mb-2 text-white">Full name *</label>
+              <input 
+                id="fullName" 
+                name="fullName" 
+                required 
+                className="w-full px-4 py-3.5 bg-white/8 backdrop-blur-md border border-white/20 rounded-xl text-white placeholder:text-white/50 focus:outline-none focus:ring-2 focus:ring-white/30 focus:border-white/30 transition-all hover:bg-white/10" 
+                placeholder="Jane Doe" 
+              />
+            </div>
+
+            <div>
+              <label htmlFor="experience" className="block text-sm font-semibold mb-2 text-white">How was the website?</label>
+              <select 
+                id="experience" 
+                name="experience" 
+                className="w-full px-4 py-3.5 bg-white/8 backdrop-blur-md border border-white/20 rounded-xl text-white focus:outline-none focus:ring-2 focus:ring-white/30 focus:border-white/30 transition-all hover:bg-white/10 appearance-none cursor-pointer"
+                style={{backgroundImage: `url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' stroke='rgba(255,255,255,0.7)'%3E%3Cpath stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M19 9l-7 7-7-7'%3E%3C/path%3E%3C/svg%3E")`, backgroundPosition: 'right 0.75rem center', backgroundRepeat: 'no-repeat', backgroundSize: '1.5em 1.5em'}}
+              >
+                <option value="" className="bg-zinc-900">Choose...</option>
+                <option value="excellent" className="bg-zinc-900">Excellent</option>
+                <option value="good" className="bg-zinc-900">Good</option>
+                <option value="okay" className="bg-zinc-900">Okay</option>
+                <option value="poor" className="bg-zinc-900">Poor</option>
+              </select>
+            </div>
+
+            <div>
+              <label className="block text-sm font-semibold mb-3 text-white">How would you rate it?</label>
+              <div className="flex items-center gap-3">
+                {[1,2,3,4,5].map((n) => (
+                  <label key={n} className="flex-1">
+                    <input type="radio" name="rating" value={n} className="peer sr-only" />
+                    <div className="flex items-center justify-center h-12 bg-white/8 backdrop-blur-md border border-white/20 rounded-xl cursor-pointer transition-all hover:bg-white/15 peer-checked:bg-white/20 peer-checked:border-white/40 peer-checked:ring-2 peer-checked:ring-white/30">
+                      <span className="text-sm font-semibold text-white">{n}</span>
+                    </div>
+                  </label>
+                ))}
+              </div>
+            </div>
+
+            <div>
+              <label className="block text-sm font-semibold mb-3 text-white">Would you suggest this to other influencers?</label>
+              <div className="flex items-center gap-4">
+                <label className="flex-1">
+                  <input type="radio" name="suggest" value="yes" className="peer sr-only" />
+                  <div className="flex items-center justify-center px-6 py-3 bg-white/8 backdrop-blur-md border border-white/20 rounded-xl cursor-pointer transition-all hover:bg-white/15 peer-checked:bg-white/20 peer-checked:border-white/40 peer-checked:ring-2 peer-checked:ring-white/30">
+                    <span className="text-sm font-medium text-white">Yes</span>
+                  </div>
+                </label>
+                <label className="flex-1">
+                  <input type="radio" name="suggest" value="no" className="peer sr-only" />
+                  <div className="flex items-center justify-center px-6 py-3 bg-white/8 backdrop-blur-md border border-white/20 rounded-xl cursor-pointer transition-all hover:bg-white/15 peer-checked:bg-white/20 peer-checked:border-white/40 peer-checked:ring-2 peer-checked:ring-white/30">
+                    <span className="text-sm font-medium text-white">No</span>
+                  </div>
+                </label>
+              </div>
+            </div>
+
+            <div>
+              <label className="block text-sm font-semibold mb-3 text-white">Have you followed the YouTube and Instagram pages?</label>
+              <div className="flex items-center gap-4">
+                <label className="flex-1">
+                  <input type="radio" name="followed" value="yes" onChange={() => setFollowed('yes')} className="peer sr-only" />
+                  <div className="flex items-center justify-center px-6 py-3 bg-white/8 backdrop-blur-md border border-white/20 rounded-xl cursor-pointer transition-all hover:bg-white/15 peer-checked:bg-white/20 peer-checked:border-white/40 peer-checked:ring-2 peer-checked:ring-white/30">
+                    <span className="text-sm font-medium text-white">Yes</span>
+                  </div>
+                </label>
+                <label className="flex-1">
+                  <input type="radio" name="followed" value="no" onChange={() => setFollowed('no')} className="peer sr-only" />
+                  <div className="flex items-center justify-center px-6 py-3 bg-white/8 backdrop-blur-md border border-white/20 rounded-xl cursor-pointer transition-all hover:bg-white/15 peer-checked:bg-white/20 peer-checked:border-white/40 peer-checked:ring-2 peer-checked:ring-white/30">
+                    <span className="text-sm font-medium text-white">No</span>
+                  </div>
+                </label>
+              </div>
+            </div>
+
+            {followed === 'no' && (
+              <div className="space-y-3 p-5 bg-white/5 backdrop-blur-md border border-white/15 rounded-xl">
+                <p className="text-sm font-semibold text-white/90">Share links (optional)</p>
+                <input 
+                  name="youtubeLink" 
+                  placeholder="YouTube link" 
+                  className="w-full px-4 py-3 bg-white/8 backdrop-blur-md border border-white/20 rounded-xl text-white placeholder:text-white/50 focus:outline-none focus:ring-2 focus:ring-white/30 focus:border-white/30 transition-all hover:bg-white/10" 
+                />
+                <input 
+                  name="instagramLink" 
+                  placeholder="Instagram link" 
+                  className="w-full px-4 py-3 bg-white/8 backdrop-blur-md border border-white/20 rounded-xl text-white placeholder:text-white/50 focus:outline-none focus:ring-2 focus:ring-white/30 focus:border-white/30 transition-all hover:bg-white/10" 
+                />
+              </div>
+            )}
+
+            <div>
+              <label htmlFor="email" className="block text-sm font-semibold mb-2 text-white">Email (optional)</label>
+              <input 
+                id="email" 
+                name="email" 
+                type="email" 
+                value={emailValue} 
+                onChange={handleEmailChange} 
+                className={`w-full px-4 py-3.5 bg-white/8 backdrop-blur-md rounded-xl text-white placeholder:text-white/50 focus:outline-none focus:ring-2 transition-all hover:bg-white/10 ${emailError || serverFieldError('email') ? 'border-2 border-red-400/80 ring-2 ring-red-400/20' : 'border border-white/20 focus:ring-white/30 focus:border-white/30'}`} 
+                placeholder="you@example.com" 
+              />
+              <ValidationError prefix="Email" field="email" errors={formState.errors} />
+              {(emailError || serverFieldError('email')) && (<p className="mt-2 text-sm text-red-300 font-medium">{emailError || serverFieldError('email')}</p>)}
+            </div>
+
+            <div className="text-center pt-2">
+              <button 
+                type="submit" 
+                disabled={formState.submitting} 
+                className="px-8 py-3.5 bg-white/15 backdrop-blur-md border border-white/30 rounded-full font-semibold text-white shadow-lg hover:shadow-xl hover:bg-white/20 hover:scale-[1.02] active:scale-[0.98] transition-all disabled:opacity-50 disabled:cursor-not-allowed focus-visible:ring-4 focus-visible:ring-white/30"
+              >
+                {formState.submitting ? 'Sending...' : 'Send feedback'}
+              </button>
+            </div>
+
+            {formState.succeeded && (
+              <div className="text-center p-4 bg-green-500/20 backdrop-blur-md border border-green-400/30 rounded-xl">
+                <p className="text-green-200 text-lg font-semibold">Thanks — feedback received 🎉</p>
+              </div>
+            )}
+
+            {/* If there are server-side errors, show a generic message */}
+            {!formState.succeeded && (() => {
+              const raw = (formState as unknown as { errors?: FieldErr | Record<string, FieldErr> | FieldErr[] }).errors;
+              const arr: FieldErr[] = Array.isArray(raw) ? raw : raw ? Object.values(raw as Record<string, FieldErr>) : [];
+              return arr.length > 0;
+            })() && (
+              <div className="text-center p-4 bg-red-500/20 backdrop-blur-md border border-red-400/30 rounded-xl">
+                <p className="text-red-300 text-lg font-semibold">Oops! Something went wrong. Please check the highlighted fields.</p>
+              </div>
+            )}
+          </form>
+        </div>
       </div>
-
-      <h3 className="text-xl font-semibold text-white mb-2">Share your feedback</h3>
-      <p className="text-sm text-white/70 mb-4">Quick feedback helps me improve — a few questions only.</p>
-
-      <form id="response-form" onSubmit={handleSubmit} className="space-y-4">
-        <div>
-          <label htmlFor="fullName" className="block text-sm font-medium mb-2 text-white/90">Full name *</label>
-          <input id="fullName" name="fullName" required className="w-full px-4 py-3 bg-white/5 backdrop-blur-sm border border-white/10 rounded-lg text-white placeholder:text-white/60 focus:outline-none focus:ring-2 focus:ring-purple-400/25 transition" placeholder="Jane Doe" />
-        </div>
-
-        <div>
-          <label htmlFor="experience" className="block text-sm font-medium mb-2 text-white/90">How was the website?</label>
-          <select id="experience" name="experience" className="w-full px-4 py-3 bg-white/5 backdrop-blur-sm border border-white/10 rounded-lg text-white focus:outline-none focus:ring-2 focus:ring-purple-400/25 transition">
-            <option value="">Choose...</option>
-            <option value="excellent">Excellent</option>
-            <option value="good">Good</option>
-            <option value="okay">Okay</option>
-            <option value="poor">Poor</option>
-          </select>
-        </div>
-
-        <div>
-          <label className="block text-sm font-medium mb-2 text-white/90">How would you rate it?</label>
-          <div className="flex items-center gap-2">
-            {[1,2,3,4,5].map((n) => (
-              <label key={n} className="inline-flex items-center gap-2">
-                <input type="radio" name="rating" value={n} className="accent-purple-400" />
-                <span className="text-sm text-white/90">{n}</span>
-              </label>
-            ))}
-          </div>
-        </div>
-
-        <div>
-          <label className="block text-sm font-medium mb-2 text-white/90">Would you suggest this to other influencers?</label>
-          <div className="flex items-center gap-4">
-            <label className="inline-flex items-center gap-2"><input type="radio" name="suggest" value="yes" className="accent-purple-400" /> <span className="text-white/90">Yes</span></label>
-            <label className="inline-flex items-center gap-2"><input type="radio" name="suggest" value="no" className="accent-purple-400" /> <span className="text-white/90">No</span></label>
-          </div>
-        </div>
-
-        <div>
-          <label className="block text-sm font-medium mb-2 text-white/90">Have you followed the YouTube and Instagram pages?</label>
-          <div className="flex items-center gap-4">
-            <label className="inline-flex items-center gap-2"><input type="radio" name="followed" value="yes" onChange={() => setFollowed('yes')} className="accent-purple-400" /> <span className="text-white/90">Yes</span></label>
-            <label className="inline-flex items-center gap-2"><input type="radio" name="followed" value="no" onChange={() => setFollowed('no')} className="accent-purple-400" /> <span className="text-white/90">No</span></label>
-          </div>
-        </div>
-
-        {followed === 'no' && (
-          <div className="space-y-2">
-            <p className="text-sm text-white/80">Share links (optional)</p>
-            <input name="youtubeLink" placeholder="YouTube link" className="w-full px-4 py-3 bg-white/5 backdrop-blur-sm border border-white/10 rounded-lg text-white placeholder:text-white/60 focus:outline-none focus:ring-2 focus:ring-purple-400/25 transition" />
-            <input name="instagramLink" placeholder="Instagram link" className="w-full px-4 py-3 bg-white/5 backdrop-blur-sm border border-white/10 rounded-lg text-white placeholder:text-white/60 focus:outline-none focus:ring-2 focus:ring-purple-400/25 transition" />
-          </div>
-        )}
-
-        <div>
-          <label htmlFor="email" className="block text-sm font-medium mb-2 text-white/90">Email (optional)</label>
-          <input id="email" name="email" type="email" value={emailValue} onChange={handleEmailChange} className={`w-full px-4 py-3 bg-white/5 backdrop-blur-sm border rounded-lg text-white placeholder:text-white/60 focus:outline-none focus:ring-2 focus:ring-purple-400/25 transition ${emailError || serverFieldError('email') ? 'border-red-400 ring-red-300/20' : 'border-white/10'}`} placeholder="you@example.com" />
-          <ValidationError prefix="Email" field="email" errors={formState.errors} />
-          {(emailError || serverFieldError('email')) && (<p className="mt-2 text-sm text-red-300">{emailError || serverFieldError('email')}</p>)}
-        </div>
-
-        <div className="text-center">
-          <button type="submit" disabled={formState.submitting} className="px-6 py-3 bg-white/6 backdrop-blur-sm border border-white/10 rounded-full font-semibold text-white shadow-md hover:shadow-lg transition disabled:opacity-70 focus-visible:ring-4 focus-visible:ring-purple-400/20">
-            {formState.submitting ? 'Sending...' : 'Send feedback'}
-          </button>
-        </div>
-
-        {formState.succeeded && (
-          <p className="text-center text-green-200 text-lg">Thanks — feedback received 🎉</p>
-        )}
-
-        {/* If there are server-side errors, show a generic message */}
-        {!formState.succeeded && (() => {
-          const raw = (formState as unknown as { errors?: FieldErr | Record<string, FieldErr> | FieldErr[] }).errors;
-          const arr: FieldErr[] = Array.isArray(raw) ? raw : raw ? Object.values(raw as Record<string, FieldErr>) : [];
-          return arr.length > 0;
-        })() && (
-          <p className="text-center text-red-300 text-lg">Oops! Something went wrong. Please check the highlighted fields.</p>
-        )}
-      </form>
 
       {/* modal */}
       {showModal && (
         <div className="fixed inset-0 z-40 flex items-center justify-center px-4">
-          <div className="absolute inset-0 bg-black/40 backdrop-blur-sm" onClick={() => setShowModal(false)} />
-          <div className="relative z-10 max-w-sm w-full bg-white/6 backdrop-blur-lg border border-white/10 rounded-2xl p-5 shadow-xl">
-            <h4 className="text-lg font-semibold text-white mb-2">Thanks for your feedback! 🎉</h4>
-            <p className="text-sm text-white/80 mb-4">I really appreciate you taking the time. It helps me make the site even better.</p>
+          <div className="absolute inset-0 bg-black/50 backdrop-blur-sm" onClick={() => setShowModal(false)} />
+          <div className="relative z-10 max-w-md w-full bg-white/15 backdrop-blur-2xl border border-white/25 rounded-3xl p-8 shadow-2xl animate-in fade-in zoom-in duration-300">
+            <div className="pointer-events-none absolute -inset-4 -z-10 rounded-3xl bg-gradient-to-br from-purple-500/20 via-pink-500/20 to-blue-400/20 blur-2xl" aria-hidden />
+            <h4 className="text-2xl font-bold text-white mb-3">Thanks for your feedback! 🎉</h4>
+            <p className="text-sm text-white/80 mb-6 leading-relaxed">I really appreciate you taking the time. It helps me make the site even better.</p>
             <div className="flex justify-end gap-3">
-              <button onClick={() => setShowModal(false)} className="px-4 py-2 rounded-lg bg-transparent border border-white/12 text-white">Close</button>
+              <button 
+                onClick={() => setShowModal(false)} 
+                className="px-6 py-2.5 rounded-xl bg-white/15 backdrop-blur-md border border-white/25 text-white font-medium hover:bg-white/20 transition-all hover:scale-105 active:scale-95"
+              >
+                Close
+              </button>
             </div>
           </div>
         </div>
