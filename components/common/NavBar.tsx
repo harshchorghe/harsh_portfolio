@@ -20,7 +20,6 @@ export default function Navbar() {
   }, []);
 
   useEffect(() => {
-    // Check if user has seen the tour
     try {
       const hasSeenTour = localStorage.getItem("hasSeenNavbarTour");
       if (!hasSeenTour) {
@@ -28,7 +27,6 @@ export default function Navbar() {
       }
     } catch (error) {
       console.error("localStorage error:", error);
-      // If localStorage fails, show tour anyway
       setTimeout(() => setShowTour(true), 1000);
     }
   }, []);
@@ -38,11 +36,11 @@ export default function Navbar() {
     setTourStep(0);
   };
 
+  // Updated tabs: Removed Projects, replaced Contact with GitHub
   const tabs = [
-    { title: "Projects", icon: Icons.Briefcase, href: "#projects" },
     { title: "YouTube", icon: Icons.Youtube, href: "/youtube" },
     { title: "Instagram", icon: Icons.Instagram, href: "/instagram" },
-    { title: "Contact", icon: Icons.Mail, href: "#contact" },
+    { title: "GitHub", icon: Icons.Github, href: "/github" }, // New GitHub tab
   ];
 
   const tourSteps = [
@@ -55,7 +53,7 @@ export default function Navbar() {
     {
       target: "tabs",
       title: "Navigation",
-      description: "Explore different sections - Projects, YouTube, Instagram, and Contact",
+      description: "Explore my YouTube, Instagram, and GitHub profiles",
       position: "bottom"
     },
     {
@@ -88,16 +86,14 @@ export default function Navbar() {
 
   return (
     <>
-      {/* Tour Overlay */}
+      {/* Tour Overlay - same as before */}
       {showTour && (
         <>
-          {/* Dark overlay - separate from navbar */}
           <div 
             className="fixed inset-0 z-[90] bg-black/70 backdrop-blur-sm animate-in fade-in duration-500" 
             onClick={handleSkipTour}
           />
           
-          {/* Spotlight highlight on current element */}
           <div 
             className={`fixed transition-all duration-500 ease-out z-[105] pointer-events-none ${
               currentStep.target === "logo" 
@@ -107,12 +103,10 @@ export default function Navbar() {
                 : "top-[32px] w-[46px] h-[46px] left-[50%] md:left-[calc(50%+326px-70px)]"
             } ${currentStep.target !== "tabs" ? "-translate-x-1/2 md:translate-x-0" : ""}`}
           >
-            {/* Glowing border effect */}
             <div className={`absolute inset-0 ${currentStep.target === "collab" ? "rounded-full" : "rounded-xl"} border-4 border-blue-500 shadow-[0_0_40px_rgba(59,130,246,0.8)] animate-pulse`} />
             <div className={`absolute inset-[-8px] ${currentStep.target === "collab" ? "rounded-full" : "rounded-xl"} border-2 border-blue-400/40`} />
           </div>
 
-          {/* Tour tooltip */}
           <div 
             className={`fixed pointer-events-auto transition-all duration-500 ease-out z-[100] ${
               currentStep.target === "logo"
@@ -132,10 +126,7 @@ export default function Navbar() {
                     {currentStep.title}
                   </h3>
                 </div>
-                <button
-                  onClick={handleSkipTour}
-                  className="text-zinc-400 hover:text-zinc-600 dark:hover:text-zinc-300 transition"
-                >
+                <button onClick={handleSkipTour} className="text-zinc-400 hover:text-zinc-600 dark:hover:text-zinc-300 transition">
                   <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
                   </svg>
@@ -152,9 +143,7 @@ export default function Navbar() {
                     <div
                       key={idx}
                       className={`h-1.5 rounded-full transition-all duration-300 ${
-                        idx === tourStep 
-                          ? "w-8 bg-blue-500" 
-                          : "w-1.5 bg-zinc-300 dark:bg-zinc-700"
+                        idx === tourStep ? "w-8 bg-blue-500" : "w-1.5 bg-zinc-300 dark:bg-zinc-700"
                       }`}
                     />
                   ))}
@@ -204,7 +193,6 @@ export default function Navbar() {
               : "md:min-w-[640px] md:max-w-[640px] md:px-6 md:py-2 md:shadow-md"}
           `}
         >
-          {/* Top Bar */}
           <div className="flex items-center justify-between w-full gap-4">
             {/* Logo */}
             <div id="logo">
