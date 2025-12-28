@@ -41,22 +41,7 @@ export default function GitHubClient({ user, repos }: Props) {
   return (
     <div className="min-h-screen bg-gradient-to-b from-zinc-100 to-zinc-200 dark:from-zinc-900 dark:to-zinc-800 text-zinc-900 dark:text-zinc-50">
       {/* Back Button */}
-      <button
-        onClick={() => router.push("/")}
-        className="fixed top-6 left-6 z-50 flex items-center gap-3 px-5 py-3 
-                   bg-white/70 dark:bg-zinc-900/70 backdrop-blur-xl 
-                   border border-white/30 dark:border-zinc-700/50 
-                   rounded-full shadow-xl 
-                   hover:shadow-2xl hover:scale-105 active:scale-95 
-                   transition-all duration-300 
-                   text-zinc-800 dark:text-zinc-100 font-medium"
-        aria-label="Go back"
-      >
-        <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
-        </svg>
-        <span>Back</span>
-      </button>
+     
 
       {/* Header Banner */}
       <header className="relative h-64 bg-gradient-to-r from-blue-600 to-purple-600 overflow-hidden">
