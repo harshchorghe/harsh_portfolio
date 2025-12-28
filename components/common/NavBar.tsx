@@ -25,21 +25,22 @@ export default function Navbar() {
   ];
 
   return (
-    <nav
-      className={`
-        fixed top-6 left-1/2 -translate-x-1/2 z-50
-        rounded-2xl
-        bg-white/60 dark:bg-zinc-900/60
-        backdrop-blur-lg
-        border border-white/20 dark:border-zinc-700/40
-        transition-all duration-700 ease-[cubic-bezier(0.16,1,0.3,1)]
-        px-6 py-2
-        md:flex md:items-center
-        ${isScrolled
-          ? "md:min-w-[960px]  md:px-10 md:py-4 md:shadow-2xl"
-          : "md:min-w-[640px]  md:px-6 md:py-2 md:shadow-md"}
-      `}
-    >
+    <div className="sticky top-6 z-50 flex justify-center px-4">
+      <nav
+        className={`
+          rounded-2xl
+          bg-white/60 dark:bg-zinc-900/60
+          backdrop-blur-lg
+          border border-white/20 dark:border-zinc-700/40
+          transition-all duration-700 ease-[cubic-bezier(0.16,1,0.3,1)]
+          px-6 py-2
+          md:flex md:items-center
+          w-full
+          ${isScrolled
+            ? "md:min-w-[960px] md:max-w-[960px] md:px-10 md:py-4 md:shadow-2xl"
+            : "md:min-w-[640px] md:max-w-[640px] md:px-6 md:py-2 md:shadow-md"}
+        `}
+      >
       {/* Top Bar */}
       <div className="flex items-center justify-between w-full gap-4">
         {/* Logo */}
@@ -103,6 +104,7 @@ export default function Navbar() {
           </ul>
         </div>
       </div>
-    </nav>
+      </nav>
+    </div>
   );
 }
