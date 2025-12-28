@@ -36,8 +36,8 @@ export default function Navbar() {
         px-6 py-2
         md:flex md:items-center
         ${isScrolled
-          ? "md:min-w-[960px] md:px-10 md:shadow-2xl md:scale-[1.02]"
-          : "md:min-w-[640px] md:px-6 md:shadow-md md:scale-100"}
+          ? "md:min-w-[960px]  md:px-10 md:py-4 md:shadow-2xl"
+          : "md:min-w-[640px]  md:px-6 md:py-2 md:shadow-md"}
       `}
     >
       {/* Top Bar */}
@@ -70,7 +70,7 @@ export default function Navbar() {
           </button>
 
           {/* Desktop Collab Button */}
-          <Link href="/collab" className="hidden md:block">
+          <Link href="/collab" className=" md:block">
             <button className="rounded-full p-2 bg-white/10 dark:bg-zinc-800/20 backdrop-blur-sm border border-white/10 dark:border-zinc-700/30 hover:scale-105 transition">
               <Icons.Mail size={18} />
             </button>
