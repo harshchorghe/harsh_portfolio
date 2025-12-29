@@ -1,3 +1,4 @@
+// app/layout.tsx
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
@@ -14,8 +15,7 @@ const geistMono = Geist_Mono({
 
 export const metadata: Metadata = {
   title: "Harsh Chorghe | Portfolio",
-  description:
-    "Frontend developer building delightful, animated web experiences with modern tech.",
+  description: "Frontend developer building delightful, animated web experiences with modern tech.",
 };
 
 export default function RootLayout({
@@ -26,7 +26,6 @@ export default function RootLayout({
   return (
     <html lang="en" suppressHydrationWarning>
       <head>
-        {/* Prevent dark mode flicker */}
         <script
           dangerouslySetInnerHTML={{
             __html: `
@@ -34,7 +33,6 @@ export default function RootLayout({
                 try {
                   const savedTheme = localStorage.getItem("theme");
                   const prefersDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
-                  
                   if (savedTheme === "dark" || (!savedTheme && prefersDark)) {
                     document.documentElement.classList.add("dark");
                   } else {
@@ -53,15 +51,22 @@ export default function RootLayout({
           ${geistMono.variable}
           antialiased
           min-h-screen
+          relative
         `}
       >
-        {/* 🌍 Global Background */}
-        <div className="min-h-screen bg-fixed bg-cover bg-center bg-no-repeat bg-[url('/bg.jpeg')]">
-          {/* 🎨 Overlay for readability */}
-          <div className="min-h-screen bg-white/75 dark:bg-black/75 backdrop-blur-sm">
-            {children}
-          </div>
+        {/* Fixed Background Image */}
+        <div className="fixed inset-0 bg-cover bg-center bg-no-repeat bg-[url('/bg.jpeg')] -z-10" />
+
+        {/* Fixed Overlay for readability (behind content & modals) */}
+        <div className="fixed inset-0 bg-white/75 dark:bg-black/75 backdrop-blur-sm -z-10" />
+
+        {/* Main Content - Above background */}
+        <div className="relative z-0 min-h-screen">
+          {children}
         </div>
+
+        {/* Portal container for modals (strongly recommended) */}
+        <div id="modal-root" />
       </body>
     </html>
   );
