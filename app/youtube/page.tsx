@@ -1,4 +1,8 @@
 // app/youtube/page.tsx
+
+export const runtime = "nodejs";
+export const dynamic = "force-dynamic";
+
 import Parser from "rss-parser";
 import YoutubeClient from "./YoutubeClient";
 import Navbar from "@/components/common/NavBar";
@@ -12,17 +16,25 @@ type Video = {
 
 async function getVideos(): Promise<Video[]> {
   const parser = new Parser();
-
   const CHANNEL_ID = "UCTuXyiNCQ4nhidOjoB3wv5A"; // Harsh Chorghe
-
   const feedUrl = `https://www.youtube.com/feeds/videos.xml?channel_id=${CHANNEL_ID}`;
 
   try {
-    const feed = await parser.parseURL(feedUrl);
+    // 🔥 FIX: Use fetch instead of parser.parseURL
+    const response = await fetch(feedUrl, {
+      cache: "no-store",
+    });
 
-    // RSS feeds are usually newest first, but sort explicitly
-    const sortedItems = feed.items.sort((a: any, b: any) =>
-      new Date(b.pubDate!).getTime() - new Date(a.pubDate!).getTime()
+    if (!response.ok) {
+      throw new Error(`RSS fetch failed: ${response.status}`);
+    }
+
+    const xml = await response.text();
+    const feed = await parser.parseString(xml);
+
+    const sortedItems = feed.items.sort(
+      (a: any, b: any) =>
+        new Date(b.pubDate!).getTime() - new Date(a.pubDate!).getTime()
     );
 
     return sortedItems.slice(0, 30).map((item: any) => {
@@ -39,7 +51,7 @@ async function getVideos(): Promise<Video[]> {
       };
     });
   } catch (error) {
-    console.error("RSS fetch failed:", error);
+    console.error("YouTube RSS Error:", error);
     return [];
   }
 }
@@ -47,7 +59,6 @@ async function getVideos(): Promise<Video[]> {
 export default async function YoutubePage() {
   const videos = await getVideos();
 
-  // Channel metadata (you can also fetch this dynamically if needed)
   const channelInfo = {
     title: "Harsh Chorghe",
     handle: "@Harsh_Chorghe",
@@ -60,6 +71,9 @@ export default async function YoutubePage() {
   };
 
   return (
-    <><Navbar /><YoutubeClient videos={videos} channelInfo={channelInfo} /></>
+    <>
+      <Navbar />
+      <YoutubeClient videos={videos} channelInfo={channelInfo} />
+    </>
   );
 }
