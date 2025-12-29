@@ -2,10 +2,12 @@
 
 import React from "react";
 import { Users, Image } from "lucide-react";
+import Navbar from "@/components/common/NavBar";
 
 export default function InstagramPage() {
   return (
     <div className="min-h-screen bg-gradient-to-b from-gray-900 via-zinc-900 to-black text-white">
+      <Navbar />
       {/* Header Banner with Instagram Gradient */}
       <header className="relative h-64 bg-gradient-to-r from-purple-600 via-pink-600 to-orange-500 overflow-hidden">
         <div className="absolute inset-0 bg-black/40" />
