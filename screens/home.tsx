@@ -113,7 +113,7 @@ export default function HomeScreen() {
               <div className="absolute inset-0 bg-blue-500/10 blur-2xl group-hover:bg-blue-500/20 transition-all duration-500" />
               
               <img  
-                src="/profile2.jpg"
+                src="/Profile2.jpg"
                 alt="Harsh Chorghe"
                 className="relative w-80 h-120 md:w-90 md:h-130 lg:w-100 lg:h-140
                            object-cover
